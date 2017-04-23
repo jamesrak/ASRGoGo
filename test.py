@@ -1,7 +1,6 @@
 import tornado.ioloop
 import tornado.web
 import tornado
-import pandas as pd
 import wave
 import StringIO
 import os
