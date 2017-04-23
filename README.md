@@ -1,12 +1,12 @@
 # ASRGoGo
 python 2.7.13
 
-# คำสั่งลง library
+## คำสั่งลง library
 
 `pip install tornado`
 
 `pip install SpeechRecognition`
 
 
-# วิธีรัน
+## วิธีรัน
 `python test.py`
