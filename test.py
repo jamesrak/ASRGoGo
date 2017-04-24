@@ -2,7 +2,7 @@ import tornado.ioloop
 import tornado.web
 import tornado
 import wave
-import StringIO
+import io
 import os
 import speech_recognition as sr
 
@@ -22,7 +22,7 @@ class FileHandler(tornado.web.RequestHandler):
         print("please say something")
         r = sr.Recognizer()
         #-------------------get audio------------------------
-        with sr.AudioFile(StringIO.StringIO(file_body)) as source:
+        with sr.AudioFile(io.BytesIO(file_body)) as source:
             audio = r.listen(source)
         try:
             print("analyse")
