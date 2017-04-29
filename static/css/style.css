@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Kanit');
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css?family=Righteous');
 
 ul {
   list-style: none;
@@ -23,8 +24,8 @@ ul {
   max-height: 100vh;
   font-size: 1.6em;
   font-weight: 100;
-  top: 80px;
-  bottom: 140px;
+  top: 110px;
+  bottom: 135px;
   left: 50%;
   margin-left: -40%;
   margin-right: -40%;
@@ -1062,9 +1063,24 @@ ul {
 
 }
 body {
+  margin: 0; 
+  height: 100%; 
   overflow: hidden;
-  background: #000;
-  z-index:1;
+  background-color: #000;
+}
+
+
+body .govageeheader {
+  position: absolute;
+  z-index: 11111; 
+  color: #fff;
+  text-align: center;
+  font-family: 'Righteous', cursive;
+  font-size: 35px;
+  background-color: rgba(33, 33, 33, 0.3);
+  width: 100vw;
+  height: 80px;
+  top: 0px;
 }
 
 body .container {
@@ -1073,7 +1089,7 @@ body .container {
   bottom: 0;
   width: 110px;
   height: 110px;
-  margin: -55px -55px 34px -55px;
+  margin: -55px -55px 35px -55px;
 }
 
 body .container #btn {
