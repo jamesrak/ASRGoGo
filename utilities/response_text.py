@@ -56,14 +56,16 @@ def generateResponseText(text,category):
     if((text=="โกวาจี") | (text=="สวัสดี") | (text=="หวัดดี") ):
          return gwjResponse[random.randint(0,len(gwjResponse)-1)]
     if(category == 0):
-        hh = str(h-13)
+        hh = str(h)
         mm = str(m)
         if(m == 30):
             mm ="ครึ่ง"
         if(h == 13):
             return "ตั้งปลุกตอนบ่ายโมง"+mm+"นาทีเรียบร้อย"
-        if(h > 13):
+        if((h > 13) & (h != 99)):
+            h = str(h-13)
             hh = "บ่าย"+str(h)
+            return "ตั้งปลุกตอน"+hh+"โมง"+mm+"นาทีเรียบร้อย"
         if(h!=99 & m!=99):
             return "ตั้งปลุกตอน"+hh+"โมง"+mm+"นาทีเรียบร้อย"
         elif(h!=99 & m==99):
@@ -84,9 +86,11 @@ def generateResponseText(text,category):
 
 print(generateResponseText("สวัสดี",0))
 print(generateResponseText("โกวาจี",0))
-# print("".join(gwjResponse))
+ยพรืะpr# print("".join(gwjResponse))
 print(generateResponseText(test0,0))
 print(generateResponseText(test1,1))
 print(generateResponseText(test2,2))
 print(generateResponseText(test3,3))
 print(generateResponseText(test4,4))
+
+print(generateResponseText("ฉัน อยาก ตื่น ห้า โมง",0))
