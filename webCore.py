@@ -9,6 +9,7 @@ import http
 import json
 from client import speechToText
 import pickle
+import wave
 from utilities.response_text import generateResponseText
 
 public_root = os.path.join(os.path.dirname(__file__), 'static')
@@ -53,9 +54,10 @@ class RecogHandler(tornado.web.RequestHandler):
         try:
             print("analyse")
             # out = getJSONResponse(file_body)
-            # f = open(file_body)
             # print(type(file_body))
-            out = speechToText(audio)
+            # print(type(audio.get_raw_data()))
+            f = wave.open(io.BytesIO(file_body), 'r')
+            out = speechToText(f)
             # out = r.recognize_google(audio,language="th-TH")
             self.write(out)
         except sr.RequestError as e:
