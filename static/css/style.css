@@ -19,16 +19,20 @@ ul {
   position: absolute;
   color: #fff;
   font-family: 'Kanit', sans-serif;
-  min-width: 480px;
-  max-width: 80vw;
-  max-height: 100vh;
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: 100;
+  width: 50vw;
   top: 110px;
   bottom: 135px;
-  left: 50%;
-  margin-left: -40%;
-  margin-right: -40%;
+  left: 25vw;
+}
+
+.message {
+  margin: 10px 0px;
+}
+
+.right_talk {
+  text-align: right;
 }
 
 ::-webkit-scrollbar {
@@ -1063,16 +1067,16 @@ ul {
 
 }
 body {
-  margin: 0; 
-  height: 100%; 
+  background-image: url("/src/bga.jpg") ;
+  margin: 0;
+  height: 100%;
   overflow: hidden;
-  background-color: #000;
 }
 
 
 body .govageeheader {
   position: absolute;
-  z-index: 11111; 
+  z-index: 11111;
   color: #fff;
   text-align: center;
   font-family: 'Righteous', cursive;
@@ -1124,7 +1128,7 @@ body .container #btn+label:after {
   background: #fff;
   cursor: pointer;
   z-index: 1200;
-  
+
 }
 
 body .container #btn:checked+label:after {
