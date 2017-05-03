@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  
+
   <img src="src/bg.jpg" style="opacity: 0.4; z-index:-1; width:auto; max-height: 100wh; position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto; -webkit-filter: brightness(90%) blur(11px);">
   <div class="container">
     <input type="checkbox" id="btn" onclick="startTri(); decision(this);"/>
@@ -26,7 +26,7 @@
   <div class="govageeheader"><p style="opacity: 100%; margin-top: 16px; z-index: 99999;">govajee</p></div>
 
   <div id="large-header" class="large-header">
-    <canvas id="demo-canvas" 
+    <canvas id="demo-canvas"
       style="z-index: 99;
       bottom: 0;
 	    margin: 0px 0px 0px 0px;">
@@ -114,7 +114,7 @@
             else responsiveVoice.speak("งงค่ะ", "Thai Female" , {pitch: pp}, {rate: 1.7});
           }
         };
-        
+
         request.send(formData);
       });
     }
@@ -169,7 +169,7 @@
             toggle = true;
         } else {toggle = false; aph = 0;}
         console.log(toggle);
-    }   
+    }
 
     function initHeader() {
         width = window.innerWidth;
