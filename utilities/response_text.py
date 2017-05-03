@@ -53,19 +53,20 @@ def generateResponseText(text,category):
             if((t == nword) & (count == 0)):
                 h = n+1
                 count+=1
-    if(text=="โกวาจี"):
+    if((text=="โกวาจี") | (text=="สวัสดี") | (text=="หวัดดี") ):
          return gwjResponse[random.randint(0,len(gwjResponse)-1)]
     if(category == 0):
         hh = str(h-13)
         mm = str(m)
-        if(m == 30) mm ="ครึ่ง"
+        if(m == 30):
+            mm ="ครึ่ง"
         if(h == 13):
             return "ตั้งปลุกตอนบ่ายโมง"+mm+"นาทีเรียบร้อย"
         if(h > 13):
             hh = "บ่าย"+str(h)
         if(h!=99 & m!=99):
             return "ตั้งปลุกตอน"+hh+"โมง"+mm+"นาทีเรียบร้อย"
-        else if(h!=99 & m==99):
+        elif(h!=99 & m==99):
             return "ตั้งปลุกตอน"+hh+"โมงเรียบร้อย"
         else:
             return "ตั้งปลุกเรียบร้อย"
@@ -81,7 +82,7 @@ def generateResponseText(text,category):
     if(category == 4):
         return "รับทราบ"
 
-
+print(generateResponseText("สวัสดี",0))
 print(generateResponseText("โกวาจี",0))
 # print("".join(gwjResponse))
 print(generateResponseText(test0,0))
