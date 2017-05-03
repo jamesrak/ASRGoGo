@@ -25,10 +25,7 @@ test3 = "วันนี้ มี งาน อะไร ต้อง ทำ �
 test4 = "ตื่น แล้ว"
 
 #more test set
-test00 = "พรุ่งนี้ เช้า ตื่น สิบ โมง สิบ ห้า นะ"
-
-print(type(number[2]))
-print(type("สิบ"))
+test0 = "พรุ่งนี้ เช้า ตื่น บ่าย โมง สิบ ห้า นะ"
 
 def generateResponseText(text,category):
     textList = text.split()
@@ -36,6 +33,15 @@ def generateResponseText(text,category):
     m = 99
     count = 0
     for i,t in enumerate(textList):
+        if(t == "บ่าย"):
+            h = 13
+            count+=1
+            for n, nword in enumerate(number):
+                if(textList[i+1] == nword):
+                    h = h+(n+1)
+                    break
+        if(t == "ครึ่ง"):
+            m = 30
         for n, nword in enumerate(number):
             if((t == nword) & (count > 1)):
                 m = m + (n + 1)
@@ -50,10 +56,19 @@ def generateResponseText(text,category):
     if(text=="โกวาจี"):
          return gwjResponse[random.randint(0,len(gwjResponse)-1)]
     if(category == 0):
+        hh = str(h-13)
+        mm = str(m)
+        if(m == 30) mm ="ครึ่ง"
+        if(h == 13):
+            return "ตั้งปลุกตอนบ่ายโมง"+mm+"นาทีเรียบร้อย"
+        if(h > 13):
+            hh = "บ่าย"+str(h)
         if(h!=99 & m!=99):
-            return "ตั้งปลุกตอน"+str(h)+"โมง"+str(m)+"นาทีเรียบร้อย"
-        if(h!=99 & m==99):
-            return "ตั้งปลุกตอน"+str(h)+"โมงเรียบร้อย"
+            return "ตั้งปลุกตอน"+hh+"โมง"+mm+"นาทีเรียบร้อย"
+        else if(h!=99 & m==99):
+            return "ตั้งปลุกตอน"+hh+"โมงเรียบร้อย"
+        else:
+            return "ตั้งปลุกเรียบร้อย"
     if(category == 1):
         currentTime = str(datetime.datetime.now().time());
         h=currentTime[0:2]
