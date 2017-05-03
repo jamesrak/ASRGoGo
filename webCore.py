@@ -41,32 +41,37 @@ def getJSONResponse(audio):
         print("Error: " + str(e))
         return str(e)
 
-class FileHandler(tornado.web.RequestHandler):
+class RecogHandler(tornado.web.RequestHandler):
     def post(self):
         fileinfo = self.request.files
-        # print "fileinfo is", fileinfo
         file_body = self.request.files['filearg'][0]['body']
-        print("please say something")
         r = sr.Recognizer()
         #-------------------get audio------------------------
         with sr.AudioFile(io.BytesIO(file_body)) as source:
             audio = r.listen(source)
         try:
-            print("analyse")
             out = r.recognize_google(audio,language="th-TH")
-            # out = getJSONResponse(file_body)
-            df = [out]
-            count = countT.transform(df)
-            y_pred = model.predict(count)
-            tell = generateResponseText(out,y_pred)
-            self.write(tell)
+            self.write(out)
         except sr.RequestError as e:
             self.write("Could not understand audio")
+
+class ResponseHandler(tornado.web.RequestHandler):
+    def post(self):
+        out = tornado.escape.json_decode(self.request.body)
+        df = [out['text']]
+        count = countT.transform(df)
+        y_pred = model.predict(count)
+        print(out['text'])
+        print(y_pred[0])
+        tell = generateResponseText(out['text'], y_pred[0])
+        print(tell)
+        self.write(tell)
 
 def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
-        (r"/test", FileHandler),
+        (r"/recog", RecogHandler),
+        (r"/response", ResponseHandler),
         (r'/(.*)', tornado.web.StaticFileHandler, {'path': public_root}),
     ], debug=True)
 
