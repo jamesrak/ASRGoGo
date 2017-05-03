@@ -8,6 +8,7 @@ import speech_recognition as sr
 import http
 import json
 import pickle
+from utilities.response_text import generateResponseText
 
 public_root = os.path.join(os.path.dirname(__file__), 'static')
 
@@ -20,6 +21,7 @@ def token(x):
 #-----------------------read model------------------------------
 model = pickle.load(open("dev/clf.sav","rb"))
 countT = pickle.load(open("dev/countT.sav","rb"))
+print(generateResponseText('โกวาจี',0))
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -56,8 +58,8 @@ class FileHandler(tornado.web.RequestHandler):
             df = [out]
             count = countT.transform(df)
             y_pred = model.predict(count)
-            print(y_pred)
-            self.write(out)
+            tell = generateResponseText(out,y_pred)
+            self.write(tell)
         except sr.RequestError as e:
             self.write("Could not understand audio")
 
