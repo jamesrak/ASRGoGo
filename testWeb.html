@@ -40,10 +40,9 @@
   <!-- script zone-->
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
   <script type="text/javascript">
-  
             var pp = 0.8 + 1.0*Math.random();
             if(Math.random() < 0.5) responsiveVoice.speak("โกวาจีไงเย่เย่เย่", "Thai Female" , {pitch: pp}, {rate: 1.7});
-            else responsiveVoice.speak("อ้าวอีดอกหวัดดี", "Thai Female" , {pitch: pp}, {rate: 1.7});</script>
+            else responsiveVoice.speak("หวัดดีแจ้", "Thai Female" , {pitch: pp}, {rate: 1.7});</script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="recorder.js"></script>
 
@@ -110,9 +109,9 @@
           } else {
             __log(1,"โกวาจีกำลังเอ๋อง่ะ<div style=\"margin-top: -5px; font-size: 0.6em; font-weight: 200; color: #666; position:absolute;\">ERROR CODE " + request.status + "</div>");
             var xxxxx = Math.random();
-            if(xxxxx < 0.33) responsiveVoice.speak("พูดเหี้ยอะไรน่ะ", "Thai Female" , {pitch: pp}, {rate: 1.7});
+            if(xxxxx < 0.33) responsiveVoice.speak("พูดอะไรของเธอน่ะ", "Thai Female" , {pitch: pp}, {rate: 1.7});
             else if(xxxxx > 0.66) responsiveVoice.speak("บ่นบ่นบ่น", "Thai Female" , {pitch: pp}, {rate: 1.7});
-            else responsiveVoice.speak("งงค่ะอีสัด", "Thai Female" , {pitch: pp}, {rate: 1.7});
+            else responsiveVoice.speak("งงค่ะ", "Thai Female" , {pitch: pp}, {rate: 1.7});
           }
         };
         
