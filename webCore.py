@@ -48,20 +48,21 @@ class RecogHandler(tornado.web.RequestHandler):
         fileinfo = self.request.files
         file_body = self.request.files['filearg'][0]['body']
         r = sr.Recognizer()
-        #-------------------get audio------------------------
-        with sr.AudioFile(io.BytesIO(file_body)) as source:
-            audio = r.listen(source)
-        try:
-            print("analyse")
-            # out = getJSONResponse(file_body)
-            # print(type(file_body))
-            # print(type(audio.get_raw_data()))
-            f = wave.open(io.BytesIO(file_body), 'r')
-            out = speechToText(f)
+        f = wave.open(io.BytesIO(file_body), 'r')
+        out = speechToText(f)
+        self.write(out)
+        # #-------------------get audio------------------------
+        # with sr.AudioFile(io.BytesIO(file_body)) as source:
+        #     audio = r.listen(source)
+        # try:
+        #     print("analyse")
+        #     # out = getJSONResponse(file_body)
+        #     # print(type(file_body))
+        #     # print(type(audio.get_raw_data()))
             # out = r.recognize_google(audio,language="th-TH")
-            self.write(out)
-        except sr.RequestError as e:
-            self.write("Could not understand audio")
+        #
+        # except sr.RequestError as e:
+        #     self.write("Could not understand audio")
 
 class ResponseHandler(tornado.web.RequestHandler):
     def post(self):
