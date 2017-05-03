@@ -52,11 +52,11 @@ class RecogHandler(tornado.web.RequestHandler):
             audio = r.listen(source)
         try:
             print("analyse")
-            # out = r.recognize_google(audio,language="th-TH")
             # out = getJSONResponse(file_body)
             # f = open(file_body)
-            out = speechToText(file_body)
-            # out = r.recognize_google(audio,language="th-TH")
+            print(type(file_body))
+            # out = speechToText(file_body)
+            out = r.recognize_google(audio,language="th-TH")
             self.write(out)
         except sr.RequestError as e:
             self.write("Could not understand audio")
