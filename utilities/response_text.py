@@ -86,6 +86,7 @@ def generateResponseText(text,category):
 
 print(generateResponseText("สวัสดี",0))
 print(generateResponseText("โกวาจี",0))
+
 # print("".join(gwjResponse))
 print(generateResponseText(test0,0))
 print(generateResponseText(test1,1))
