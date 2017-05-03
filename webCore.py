@@ -7,10 +7,21 @@ import os
 import speech_recognition as sr
 import http
 import json
+import pickle
+from utilities.response_text import generateResponseText
 
 public_root = os.path.join(os.path.dirname(__file__), 'static')
 
 title = "ASR GO Go with Leader B"
+
+#----------------------make frequency dataset from words-----------------------------------
+def token(x):
+    return x.split(' ')
+
+#-----------------------read model------------------------------
+model = pickle.load(open("dev/clf.sav","rb"))
+countT = pickle.load(open("dev/countT.sav","rb"))
+print(generateResponseText('โกวาจี',0))
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -29,8 +40,6 @@ def getJSONResponse(audio):
     except Exception as e:
         print("Error: " + str(e))
         return str(e)
-    # http_client.close()
-        
 
 class FileHandler(tornado.web.RequestHandler):
     def post(self):
@@ -46,7 +55,11 @@ class FileHandler(tornado.web.RequestHandler):
             print("analyse")
             out = r.recognize_google(audio,language="th-TH")
             # out = getJSONResponse(file_body)
-            self.write(out)
+            df = [out]
+            count = countT.transform(df)
+            y_pred = model.predict(count)
+            tell = generateResponseText(out,y_pred)
+            self.write(tell)
         except sr.RequestError as e:
             self.write("Could not understand audio")
 
@@ -62,5 +75,3 @@ if __name__ == "__main__":
     app.listen(4000)
     tornado.ioloop.IOLoop.current().start()
     print("Started")
-
-
