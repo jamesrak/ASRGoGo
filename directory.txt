@@ -1,0 +1,4 @@
+./prepare_LG.sh <mylexicon.txt> <mylm.arpa> <exp/nnet2_online/phones.txt> <data/local/dict> <data/lang>
+./prepare_LG.sh g2p_ouput/g2plex-3.txt /kaldi/egs/yesno/s5/data/local/lm_tg.arpa exp/nnet2_online/phones.txt data/local/dict data/lang
+
+.arpa - 

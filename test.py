@@ -7,6 +7,7 @@ import os
 import speech_recognition as sr
 import http
 import json
+from client import speechToText
 
 public_root = os.path.join(os.path.dirname(__file__), 'static')
 
@@ -45,7 +46,9 @@ class FileHandler(tornado.web.RequestHandler):
         try:
             print("analyse")
             # out = r.recognize_google(audio,language="th-TH")
-            out = getJSONResponse(file_body)
+            # out = getJSONResponse(file_body)
+            # f = open(file_body)
+            out = speechToText(file_body)
             self.write(out)
         except sr.RequestError as e:
             self.write("Could not understand audio")

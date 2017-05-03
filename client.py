@@ -6,7 +6,7 @@ import time
 import threading
 import sys
 import urllib
-import Queue
+import queue
 import json
 import time
 import os
@@ -29,13 +29,13 @@ def rate_limited(maxPerSecond):
 
 class MyClient(WebSocketClient):
 
-    def __init__(self, filename, url, protocols=None, extensions=None, heartbeat_freq=None, byterate=32000,
+    def __init__(self, filename, url='ws://localhost:8080/client/ws/speech', protocols=None, extensions=None, heartbeat_freq=None, byterate=32000,
                  save_adaptation_state_filename=None, send_adaptation_state_filename=None):
         super(MyClient, self).__init__(url, protocols, extensions, heartbeat_freq)
         self.final_hyps = []
         self.fn = filename
         self.byterate = byterate
-        self.final_hyp_queue = Queue.Queue()
+        self.final_hyp_queue = queue.Queue()
         self.save_adaptation_state_filename = save_adaptation_state_filename
         self.send_adaptation_state_filename = send_adaptation_state_filename
 
@@ -65,9 +65,8 @@ class MyClient(WebSocketClient):
 
 
     def received_message(self, m):
+        # print(str(m))
         response = json.loads(str(m))
-        #print >> sys.stderr, "RESPONSE:", response
-        #print >> sys.stderr, "JSON was:", m
         if response['status'] == 0:
             if 'result' in response:
                 trans = response['result']['hypotheses'][0]['transcript']
@@ -101,7 +100,7 @@ class MyClient(WebSocketClient):
 
 
 def main():
-
+    print("test jaaa")
     parser = argparse.ArgumentParser(description='Command line client for kaldigstserver')
     parser.add_argument('-u', '--uri', default="ws://localhost:8888/client/ws/speech", dest="uri", help="Server websocket URI")
     parser.add_argument('-r', '--rate', default=32000, dest="rate", type=int, help="Rate in bytes/sec at which audio should be sent to the server. NB! For raw 16-bit audio it must be 2*samplerate!")
@@ -121,8 +120,14 @@ def main():
                   save_adaptation_state_filename=args.save_adaptation_state, send_adaptation_state_filename=args.send_adaptation_state)
     ws.connect()
     result = ws.get_full_hyp()
-    print result.encode('utf-8')
+    # print result.encode('utf-8')
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
+
+def speechToText(audio):
+    ws = MyClient(audio)
+    ws.connect()
+    result = ws.get_full_hyp()
+    return result
